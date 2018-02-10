@@ -13,6 +13,7 @@ Learning Django, a Python web framework.
 	- This will create a python file named something like `<app_name>/migrations/0001_initial.py` which will contain the python code for the migrations.
 - See the raw SQL commands that will be run on applying a migration: `python manage.py sqlmigrate <app_name> 0001`
 	- This command doesn't actually run the migration. It just outputs what SQL commands will be run on migration.
+- Create an admin user who can login to the admin site: `python manage.py createsuperuser`
 
 ## Migration Process
 1. Change or create models in `models.py`
