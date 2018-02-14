@@ -1,0 +1,27 @@
+{% extends "personal/header.html" %}
+{% block content %}
+{% load staticfiles %}
+
+{% for post in object_list %}
+    <section class="fdb-block">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <h1>{{ post.title }}</h1>
+            </div>
+          </div>
+
+          <div class="row align-items-center pt-2 pt-lg-5">
+            <div class="col-12 text-center">
+              <h2>{{ post.date|date:"Y-m-d" }}</h2>
+              <p class="text-h3">
+                  Welcome to my website. Just getting started here. Trying my hand at Django.
+                  Expect great things here very soon.
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+{% endfor %}
+
+{% endblock %}
