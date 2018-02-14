@@ -3,7 +3,9 @@ Learning Django, a Python web framework.
 
 ## Useful commands
 - Install: `pip install Django`
-- Generate project: `django-admin startproject <project_name>`
+- Generate project: `django-admin startproject <project_name> .`
+	- Notice the `.`(period) at the end. This will generate the project in the current directory.
+	- A project generated in the root repo is necessary to deploy on Heroku.
 - Run server: `python manage.py runserver`
 - Generate new app: `python manage.py startapp <app_name>`
 - Run database migrations: `python manage.py migrate`
