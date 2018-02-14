@@ -6,16 +6,8 @@
         {% for post in object_list %}
           <div class="row">
             <div class="col-sm-12 text-center">
-              <h1>{{ post.date|date:"Y-m-d" }}</h1>
-            </div>
-          </div>
-
-          <div class="row align-items-center pt-2 pt-lg-5">
-            <div class="col-12 text-center">
-              <h2>{{ post.title }}</h2>
-              <p class="text-h3">
-                  Read here.
-              </p>
+                <h3>{{ post.date|date:"Y-m-d" }}</h3>
+                <h1><a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a></h1>
             </div>
           </div>
         {% endfor %}

@@ -10,3 +10,8 @@ class ListView(generic.ListView):
     def get_queryset(self):
         """Return the last 25 blog post titles"""
         return Post.objects.order_by('-date')[:25]
+
+
+class DetailView(generic.DetailView):
+    model = Post
+    template_name = 'blog/post.html'
