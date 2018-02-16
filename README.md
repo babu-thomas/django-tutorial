@@ -21,3 +21,18 @@ Learning Django, a Python web framework.
 1. Change or create models in `models.py`
 2. Create migrations for the changes: `python manage.py makemigrations`
 3. Apply migrations to the database: `python manage.py migrate`
+
+## Deploy to Heroku
+1. Make an account on [Heroku](https://www.heroku.com/) and install their [CLI](https://devcenter.heroku.com/articles/heroku-cli)
+2. Install gunicorn server: `pipenv install gunicorn`
+3. Set `ALLOWED_HOSTS` in `settings.py` to `['*']`
+4. Ensure `Pipfile.lock` is present in repo root
+5. Create `Procfile` in repo root
+	- Example [here](https://github.com/babu-thomas/django-tutorial/blob/master/Procfile)
+6. Login to Heroku account from command line: `heroku login`
+7. Create new app on Heroku: `heroku create`
+8. Add hook for Heroku within git: `heroku git:remote -a <app_name>`
+9. Configure Heroku to ignore static files: `heroku config:set DISABLE_COLLECTSTATIC=1`
+10. Push code to Heroku: `git push heroku master`
+11. Make app live: `heroku ps:scale web=1`
+12. Open app in browser: `heroku open`
