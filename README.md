@@ -32,7 +32,34 @@ Learning Django, a Python web framework.
 6. Login to Heroku account from command line: `heroku login`
 7. Create new app on Heroku: `heroku create`
 8. Add hook for Heroku within git: `heroku git:remote -a <app_name>`
-9. Configure Heroku to ignore static files: `heroku config:set DISABLE_COLLECTSTATIC=1`
+9. Configure static files
+	- Either ignore static files or serve them using [WhiteNoise](http://whitenoise.evans.io/en/stable/)
+	- Ignore: `heroku config:set DISABLE_COLLECTSTATIC=1`
+	- Use WhiteNoise
+		- Install: `pipenv install whitenoise`
+		- Add whitenoise to `INSTALLED_APPS` in `settings.py` above the built-in staticfiles app
+		```
+		INSTALLED_APPS = [
+		...
+		'whitenoise.runserver_nostatic`, # here
+		'django.contrib.staticfiles`,
+		...
+		]
+		```
+		- Add whitenoise to `MIDDLEWARE` in `settings.py` after `SecurityMiddleware` and `SessionMiddleware`
+		```
+		MIDDLEWARE = [
+		'django.middleware.security.SecurityMiddleware',
+		'django.contrib.sessions.middleware.SessionMiddleware',
+		'whitenoise.middleware.WhiteNoiseMiddleware', # here
+		...
+		```
+		- Add `STATIC_ROOT` and `STATICFILES_STORAGE` setting in `settings.py`
+		```
+		STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+		STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+		```
+		
 10. Push code to Heroku: `git push heroku master`
 11. Make app live: `heroku ps:scale web=1`
 12. Open app in browser: `heroku open`
