@@ -16,6 +16,8 @@ Learning Django, a Python web framework.
 - See the raw SQL commands that will be run on applying a migration: `python manage.py sqlmigrate <app_name> 0001`
 	- This command doesn't actually run the migration. It just outputs what SQL commands will be run on migration.
 - Create an admin user who can login to the admin site: `python manage.py createsuperuser`
+- Run tests: `python manage.py test`
+	- Output verbosity can be set by `verbosity` argument. For example, `--verbosity=2`
 
 ## Migration Process
 1. Change or create models in `models.py`
