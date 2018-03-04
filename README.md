@@ -36,10 +36,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 	2. Once logged in, choose `SMTP Relay` option of sending mail, then create an `API Key`.
 	3. Make note of the username and password given.
 	4. Add the username and password to environment variables:
-		- In Windows this can be done by:
+		- On Windows:
 		```
 		set SENDGRID_USERNAME=<your_username>
 		set SENDGRID_PASSWORD=<your_password>
+		```
+		- On Heroku:
+		```
+		heroku config:set SENDGRID_USERNAME=<your_username>
+		heroku config:set SENDGRID_PASSWORD=<your_password>
 		```
 	4. In the Django application, add the following lines to `settings.py`:
 	```
@@ -61,6 +66,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 	- Example [here](https://github.com/babu-thomas/django-tutorial/blob/master/Procfile)
 6. Login to Heroku account from command line: `heroku login`
 7. Create new app on Heroku: `heroku create`
+	- Optionally rename app: `heroku apps:rename <newname>`
 8. Add hook for Heroku within git: `heroku git:remote -a <app_name>`
 9. Configure static files
 	- Either ignore static files or serve them using [WhiteNoise](http://whitenoise.evans.io/en/stable/)
@@ -71,8 +77,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 		```
 		INSTALLED_APPS = [
 		...
-		'whitenoise.runserver_nostatic`, # here
-		'django.contrib.staticfiles`,
+		'whitenoise.runserver_nostatic', # here
+		'django.contrib.staticfiles',
 		...
 		]
 		```
