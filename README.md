@@ -24,6 +24,34 @@ Learning Django, a Python web framework.
 2. Create migrations for the changes: `python manage.py makemigrations`
 3. Apply migrations to the database: `python manage.py migrate`
 
+## Sending password reset email
+- For debugging, the console email backend can be used. This will just print the email to the console.
+- To use the console email client add the following line to `settings.py`:
+```
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+```
+- To actually send emails to users, a service like [Sendgrid](https://sendgrid.com/) can be used.
+- Follow the below steps to configure Sendgrid:
+	1. Create free account on Sendgrid
+	2. Once logged in, choose `SMTP Relay` option of sending mail, then create an `API Key`.
+	3. Make note of the username and password given.
+	4. Add the username and password to environment variables:
+		- In Windows this can be done by:
+		```
+		set SENDGRID_USERNAME=<your_username>
+		set SENDGRID_PASSWORD=<your_password>
+		```
+	4. In the Django application, add the following lines to `settings.py`:
+	```
+	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+	EMAIL_HOST = 'smtp.sendgrid.net'
+	EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+	EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
+	EMAIL_PORT = 587
+	EMAIL_USE_TLS = True
+	```
+
+
 ## Deploy to Heroku
 1. Make an account on [Heroku](https://www.heroku.com/) and install their [CLI](https://devcenter.heroku.com/articles/heroku-cli)
 2. Install gunicorn server: `pipenv install gunicorn`
